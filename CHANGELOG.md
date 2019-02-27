@@ -1,3 +1,8 @@
+## 0.2.0 (February 27, 2019)
+  - [TASK] renamed metric from sentry_project_open_issues to sentry_open_issue_events
+  - [FEATURE] added some more label values
+  - [TASK] added ext-json to requirements list
+
 ## 0.1.2 (February 27, 2019)
   - [BUGFIX] renamed collection/metric
   - [BUGFIX] of course, issue counts can go down again, so gauges, not counters
