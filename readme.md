@@ -14,7 +14,7 @@ composer req ujamii/prometheus-sentry-exporter
 ```php
 require_once 'vendor/autoload.php';
 
-$sentryBase = 'https://sentry.ujamii.com/api/0/';
+$sentryBase = 'https://<YOUR-SENTRY-HOST>/api/0/';
 $token      = '<AUTH-TOKEN>'; // get from https://<YOUR-SENTRY-HOST>/api/
 
 $exporter = new \Ujamii\OpenMetrics\Sentry\SentryExporter($token, $sentryBase);
