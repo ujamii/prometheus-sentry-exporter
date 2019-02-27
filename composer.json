@@ -11,7 +11,8 @@
     ],
     "require": {
         "openmetrics-php/exposition-text": "^0.3.1",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

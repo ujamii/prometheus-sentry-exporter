@@ -48,18 +48,26 @@ class SentryExporter
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function run() : void
+    public function run(): void
     {
-        $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_project_open_issues'));
+        $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_open_issue_events'))->withHelp('Number of events for one unresolved issue.');
 
         $projectData = $this->getProjects();
         foreach ($projectData as $project) {
-            $gauges->add(
-                Gauge::fromValueAndTimestamp($this->getIssueCount($project), time())->withLabels(
-                    Label::fromNameAndValue('project_slug', $project->slug),
-                    Label::fromNameAndValue('project_name', $project->name)
-                )
-            );
+            $projectIssues = $this->getIssues($project);
+            foreach ($projectIssues as $issue) {
+                $gauges->add(
+                    Gauge::fromValueAndTimestamp($issue->count, time())->withLabels(
+                        Label::fromNameAndValue('project_slug', $project->slug),
+                        Label::fromNameAndValue('project_name', $project->name),
+                        Label::fromNameAndValue('issue_first_seen', $issue->firstSeen),
+                        Label::fromNameAndValue('issue_last_seen', $issue->lastSeen),
+                        Label::fromNameAndValue('issue_logger', $issue->logger),
+                        Label::fromNameAndValue('issue_type', $issue->type),
+                        Label::fromNameAndValue('issue_link', $issue->permalink)
+                    )
+                );
+            }
         }
 
         HttpResponse::fromMetricCollections($gauges)->withHeader('Content-Type', 'text/plain; charset=utf-8')->respond();
@@ -68,22 +76,21 @@ class SentryExporter
     /**
      * @param \stdClass $project
      *
-     * @return float
+     * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function getIssueCount(\stdClass $project) : float
+    protected function getIssues(\stdClass $project): array
     {
         $response = $this->httpClient->request('GET', "projects/{$project->organization->slug}/{$project->slug}/issues/", $this->options);
-        $issues   = $this->getJson($response);
 
-        return (float) count($issues);
+        return $this->getJson($response);
     }
 
     /**
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function getProjects() : array
+    protected function getProjects(): array
     {
         $response = $this->httpClient->request('GET', 'projects/', $this->options);
 
@@ -95,7 +102,7 @@ class SentryExporter
      *
      * @return array
      */
-    protected function getJson(Response $response) : array
+    protected function getJson(Response $response): array
     {
         return json_decode($response->getBody()->getContents());
     }
