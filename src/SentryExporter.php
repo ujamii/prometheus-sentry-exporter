@@ -3,9 +3,9 @@
 namespace Ujamii\OpenMetrics\Sentry;
 
 use GuzzleHttp\Psr7\Response;
-use OpenMetricsPhp\Exposition\Text\Collections\CounterCollection;
+use OpenMetricsPhp\Exposition\Text\Collections\GaugeCollection;
 use OpenMetricsPhp\Exposition\Text\HttpResponse;
-use OpenMetricsPhp\Exposition\Text\Metrics\Counter;
+use OpenMetricsPhp\Exposition\Text\Metrics\Gauge;
 use OpenMetricsPhp\Exposition\Text\Types\Label;
 use OpenMetricsPhp\Exposition\Text\Types\MetricName;
 
@@ -50,33 +50,33 @@ class SentryExporter
      */
     public function run() : void
     {
-        $counters = CounterCollection::withMetricName(MetricName::fromString('sentry_project'));
+        $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_project_open_issues'));
 
         $projectData = $this->getProjects();
         foreach ($projectData as $project) {
-            $counters->add(
-                Counter::fromValueAndTimestamp($this->getIssueCount($project), time())->withLabels(
+            $gauges->add(
+                Gauge::fromValueAndTimestamp($this->getIssueCount($project), time())->withLabels(
                     Label::fromNameAndValue('project_slug', $project->slug),
                     Label::fromNameAndValue('project_name', $project->name)
                 )
             );
         }
 
-        HttpResponse::fromMetricCollections($counters)->withHeader('Content-Type', 'text/plain; charset=utf-8')->respond();
+        HttpResponse::fromMetricCollections($gauges)->withHeader('Content-Type', 'text/plain; charset=utf-8')->respond();
     }
 
     /**
      * @param \stdClass $project
      *
-     * @return int
+     * @return float
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function getIssueCount(\stdClass $project) : int
+    protected function getIssueCount(\stdClass $project) : float
     {
         $response = $this->httpClient->request('GET', "projects/{$project->organization->slug}/{$project->slug}/issues/", $this->options);
         $issues   = $this->getJson($response);
 
-        return count($issues);
+        return (float) count($issues);
     }
 
     /**
