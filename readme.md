@@ -1,4 +1,4 @@
-# Exporter forsentry data in prometheus format
+# Exporter for sentry data in prometheus format
 
 This package uses the [Sentry](https://sentry.io/) web [api](https://docs.sentry.io/api/) to query for some statistics and 
 outputs them in [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format to be scraped by [prometheus](https://prometheus.io/).
