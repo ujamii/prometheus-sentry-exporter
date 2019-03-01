@@ -3,13 +3,22 @@
 This package uses the [Sentry](https://sentry.io/) web [api](https://docs.sentry.io/api/) to query for some statistics and 
 outputs them in [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format to be scraped by [prometheus](https://prometheus.io/).
 
-## Installation
+You can also fire it up as a [docker container](#with-docker).
+
+## Usage
+
+In both cases, you will need the hostname of your sentry installation and an auth token, which you can create via
+https://<YOUR-SENTRY-HOST>/api/
+
+### with Composer
+
+**Installation**
 
 ```shell
 composer req ujamii/prometheus-sentry-exporter
 ```
 
-## Usage
+**Usage in your custom file**
 
 ```php
 require_once 'vendor/autoload.php';
@@ -19,4 +28,15 @@ $token      = '<AUTH-TOKEN>'; // get from https://<YOUR-SENTRY-HOST>/api/
 
 $exporter = new \Ujamii\OpenMetrics\Sentry\SentryExporter($token, $sentryBase);
 $exporter->run();
+```
+
+### with Docker
+
+The image is based on `php:7.2-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on localhost,
+you can see the metrics on http://localhost/metrics.
+
+Configuration is done with 2 env variables: `SENTRY_HOST` and `AUTH_TOKEN`.
+
+```shell
+docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ujamii/prometheus-sentry-exporter
 ```
