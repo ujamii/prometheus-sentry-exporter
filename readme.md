@@ -1,4 +1,4 @@
-# Exporter forsentry data in prometheus format
+# Exporter for sentry data in prometheus format
 
 This package uses the [Sentry](https://sentry.io/) web [api](https://docs.sentry.io/api/) to query for some statistics and 
 outputs them in [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format to be scraped by [prometheus](https://prometheus.io/).
@@ -39,4 +39,15 @@ Configuration is done with 2 env variables: `SENTRY_HOST` and `AUTH_TOKEN`.
 
 ```shell
 docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ujamii/prometheus-sentry-exporter
+```
+
+## Output
+
+The script will generate something like:
+
+```
+# TYPE sentry_open_issue_events gauge
+# HELP sentry_open_issue_events Number of events for one unresolved issue.
+sentry_open_issue_events{project_slug="foobar", project_name="Foo Bar", issue_first_seen="2019-02-19T11:24:52Z", issue_last_seen="2019-02-28T09:17:47Z", issue_logger="php", issue_type="error", issue_link="https://<SENTRY-HOST>/<ORGANIZATION>/<PROJECT>/issues/1797/"} 16.000000 1551366084
+...
 ```
