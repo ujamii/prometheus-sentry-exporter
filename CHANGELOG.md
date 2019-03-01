@@ -1,3 +1,6 @@
+## 0.3.1 (March 01, 2019)
+  - [BUGFIX] removed unnecessary timestamps
+
 ## 0.3.0 (March 01, 2019)
   - [FEATURE] #1 provide the package as ready-to-use docker image
   - [DOC] updated output
