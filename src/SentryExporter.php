@@ -57,7 +57,7 @@ class SentryExporter
             $projectIssues = $this->getIssues($project);
             foreach ($projectIssues as $issue) {
                 $gauges->add(
-                    Gauge::fromValueAndTimestamp($issue->count, time())->withLabels(
+                    Gauge::fromValue($issue->count)->withLabels(
                         Label::fromNameAndValue('project_slug', $project->slug),
                         Label::fromNameAndValue('project_name', $project->name),
                         Label::fromNameAndValue('issue_first_seen', $issue->firstSeen),
