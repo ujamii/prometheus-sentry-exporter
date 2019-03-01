@@ -1,3 +1,9 @@
+## 0.3.0 (March 01, 2019)
+  - [FEATURE] #1 provide the package as ready-to-use docker image
+  - [DOC] updated output
+  - [DOC] fixed typo
+  - [DOC] added example output
+
 ## 0.2.0 (February 27, 2019)
   - [TASK] renamed metric from sentry_project_open_issues to sentry_open_issue_events
   - [FEATURE] added some more label values
