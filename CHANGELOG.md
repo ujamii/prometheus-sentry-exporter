@@ -1,3 +1,7 @@
+## 0.4.0 (March 04, 2019)
+  - [TASK] composer is now updated in the image to enable auto builds
+  - [DOC] removed unnecessary timestamps
+
 ## 0.3.1 (March 01, 2019)
   - [BUGFIX] removed unnecessary timestamps
 
