@@ -4,5 +4,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
  && composer --version
 
 COPY --chown=www-data:www-data . /var/www/html
-RUN php /usr/local/bin/composer install --optimize-autoloader --no-dev
+RUN php /usr/local/bin/composer install --optimize-autoloader --no-dev  --prefer-dist
 WORKDIR /var/www/html
