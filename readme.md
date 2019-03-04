@@ -8,7 +8,7 @@ You can also fire it up as a [docker container](#with-docker).
 ## Usage
 
 In both cases, you will need the hostname of your sentry installation and an auth token, which you can create via
-https://<YOUR-SENTRY-HOST>/api/
+`https://<YOUR-SENTRY-HOST>/api/`
 
 ### with Composer
 
@@ -40,6 +40,8 @@ Configuration is done with 2 env variables: `SENTRY_HOST` and `AUTH_TOKEN`.
 ```shell
 docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ujamii/prometheus-sentry-exporter
 ```
+
+View on [Docker Hub](https://hub.docker.com/r/ujamii/prometheus-sentry-exporter)
 
 ## Output
 
