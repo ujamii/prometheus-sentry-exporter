@@ -1,3 +1,8 @@
+## 0.4.1 (May 16, 2019)
+  - [TASK] Merge pull request #4 from marcindulak/issue-2
+  - [BUGFIX] set 'issue_logger' to 'unknown' if NULL
+  - [DOC] fixed formatting, added docker hub link
+
 ## 0.4.0 (March 04, 2019)
   - [TASK] composer is now updated in the image to enable auto builds
   - [DOC] removed unnecessary timestamps
