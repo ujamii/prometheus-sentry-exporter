@@ -35,7 +35,8 @@ $exporter->run();
 The image is based on `php:7.2-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on localhost,
 you can see the metrics on http://localhost/metrics.
 
-Configuration is done with 2 env variables: `SENTRY_HOST` and `AUTH_TOKEN`.
+Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN` and `HTTP_PROTO`.
+The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default.
 
 ```shell
 docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ujamii/prometheus-sentry-exporter
