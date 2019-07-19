@@ -1,3 +1,7 @@
+## 0.5.0 (July 19, 2019)
+  - [DOC] added new parameter to documentation
+  - [FEATURE] added HTTP_PROTO env variable (pull request #7 from killmeplz/patch-1)
+
 ## 0.4.1 (May 16, 2019)
   - [TASK] Merge pull request #4 from marcindulak/issue-2
   - [BUGFIX] set 'issue_logger' to 'unknown' if NULL
