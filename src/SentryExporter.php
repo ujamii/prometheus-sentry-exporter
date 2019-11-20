@@ -64,7 +64,8 @@ class SentryExporter
                         Label::fromNameAndValue('issue_last_seen', $issue->lastSeen),
                         Label::fromNameAndValue('issue_logger', $issue->logger ?? 'unknown'),
                         Label::fromNameAndValue('issue_type', $issue->type),
-                        Label::fromNameAndValue('issue_link', $issue->permalink)
+                        Label::fromNameAndValue('issue_link', $issue->permalink),
+                        Label::fromNameAndValue('issue_level', $issue->level)
                     )
                 );
             }
