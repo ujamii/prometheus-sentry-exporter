@@ -1,3 +1,8 @@
+## 0.6.0 (February 04, 2020)
+  - [DOC] added new label to documentation
+  - Merge pull request #8 from danielgrabowski/issue_level
+  - [FEATURE] added issue_level label to metric
+
 ## 0.5.0 (July 19, 2019)
   - [DOC] added new parameter to documentation
   - [FEATURE] added HTTP_PROTO env variable (pull request #7 from killmeplz/patch-1)
