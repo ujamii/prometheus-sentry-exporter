@@ -1,3 +1,13 @@
+## 0.7.0 (May 28, 2021)
+  - Merge pull request #13 from ujamii/dependabot/composer/guzzlehttp/guzzle-tw-7.2
+  - Merge pull request #16 from RyanSiu1995/Setup-the-helm-chart
+  - Setup the helm chart
+  - Merge pull request #14 from victorcfonseca/patch-1
+  - Update readme.md
+  - Update composer.json
+  - Update guzzlehttp/guzzle requirement from ^6.3 to ^7.2
+  - Create dependabot.yml
+
 ## 0.6.0 (February 04, 2020)
   - [DOC] added new label to documentation
   - Merge pull request #8 from danielgrabowski/issue_level
