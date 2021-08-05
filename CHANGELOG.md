@@ -1,3 +1,9 @@
+## 0.8.0 (August 05, 2021)
+  - [CLEANUP] use import instead of FQN
+  - [TASK] switched from php 7.2 to 8.0 in docker base image
+  - [DOC] removed issue_first_seen and issue_last_seen labels from example
+  - [!!!][CLEANUP] removed issue_first_seen and issue_last_seen labels as requested in #10. So this also closes #10
+
 ## 0.7.0 (May 28, 2021)
   - Merge pull request #13 from ujamii/dependabot/composer/guzzlehttp/guzzle-tw-7.2
   - Merge pull request #16 from RyanSiu1995/Setup-the-helm-chart
