@@ -2,6 +2,7 @@
 
 namespace Ujamii\OpenMetrics\Sentry;
 
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use OpenMetricsPhp\Exposition\Text\Collections\GaugeCollection;
 use OpenMetricsPhp\Exposition\Text\HttpResponse;
@@ -46,7 +47,7 @@ class SentryExporter
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function run(): void
     {
@@ -76,7 +77,7 @@ class SentryExporter
      * @param \stdClass $project
      *
      * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     protected function getIssues(\stdClass $project): array
     {
@@ -87,7 +88,7 @@ class SentryExporter
 
     /**
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     protected function getProjects(): array
     {
