@@ -54,8 +54,10 @@ class SentryExporter
         $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_open_issue_events'))->withHelp('Number of events for one unresolved issue.');
 
         $projectData = $this->getProjects();
+        sleep(1);
         foreach ($projectData as $project) {
             $projectIssues = $this->getIssues($project);
+            sleep(1);
             foreach ($projectIssues as $issue) {
                 $gauges->add(
                     Gauge::fromValue($issue->count)->withLabels(
