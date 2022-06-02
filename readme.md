@@ -32,7 +32,7 @@ $exporter->run();
 
 The image is based on `php:8.0-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on localhost, you can see the metrics on http://localhost/metrics.
 
-Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN` and `HTTP_PROTO`.
+Configuration is done with 4 env variables: `SENTRY_HOST`, `AUTH_TOKEN`, `USE_THROTTLING` and `HTTP_PROTO`.
 The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default. If you're working with the Sentry Cloud, your `SENTRY_HOST` variable must be "sentry.io"
 
 ```shell

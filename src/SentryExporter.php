@@ -31,9 +31,10 @@ class SentryExporter
      * SentryExporter constructor.
      *
      * @param string $token
+     * @param string $useThrottling
      * @param string $sentryBase
      */
-    public function __construct(string $token, string $sentryBase = 'https://sentry.io/api/0/')
+    public function __construct(string $token,string $useThrottling, string $sentryBase = 'https://sentry.io/api/0/')
     {
         $this->httpClient = new \GuzzleHttp\Client([
             'base_uri' => $sentryBase,
@@ -44,6 +45,7 @@ class SentryExporter
                 'Accept'        => 'application/json',
             ]
         ];
+        $this->useThrottling = $useThrottling;
     }
 
     /**
@@ -54,10 +56,14 @@ class SentryExporter
         $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_open_issue_events'))->withHelp('Number of events for one unresolved issue.');
 
         $projectData = $this->getProjects();
-        sleep(1);
+        if($this->useThrottling){
+            sleep(1);
+        }
         foreach ($projectData as $project) {
             $projectIssues = $this->getIssues($project);
-            sleep(1);
+            if($this->useThrottling){
+                sleep(1);
+            }
             foreach ($projectIssues as $issue) {
                 $gauges->add(
                     Gauge::fromValue($issue->count)->withLabels(
