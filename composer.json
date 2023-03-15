@@ -10,9 +10,14 @@
         }
     ],
     "require": {
-        "openmetrics-php/exposition-text": "^0.3.1",
-        "guzzlehttp/guzzle": "^6.3 || ^7.2",
-        "ext-json": "*"
+        "php": ">=8.0",
+        "ext-json": "*",
+        "openmetrics-php/exposition-text": "^0.3",
+        "guzzlehttp/guzzle": "^6.3 || ^7.2"
+
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
