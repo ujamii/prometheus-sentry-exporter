@@ -2,6 +2,7 @@
 
 namespace Ujamii\OpenMetrics\Sentry;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use OpenMetricsPhp\Exposition\Text\Collections\GaugeCollection;
@@ -10,33 +11,18 @@ use OpenMetricsPhp\Exposition\Text\Metrics\Gauge;
 use OpenMetricsPhp\Exposition\Text\Types\Label;
 use OpenMetricsPhp\Exposition\Text\Types\MetricName;
 
-/**
- * Class SentryExporter
- * @package Ujamii\OpenMetrics\Sentry
- */
 class SentryExporter
 {
 
-    /**
-     * @var \GuzzleHttp\Client
-     */
-    protected $httpClient;
+    protected Client $httpClient;
 
-    /**
-     * @var array
-     */
-    protected $options = [];
+    protected array $options = [];
 
-    /**
-     * SentryExporter constructor.
-     *
-     * @param string $token
-     * @param string $useThrottling
-     * @param string $sentryBase
-     */
-    public function __construct(string $token,string $useThrottling, string $sentryBase = 'https://sentry.io/api/0/')
+    protected bool $useThrottling = false;
+
+    public function __construct(string $token, string $sentryBase = 'https://sentry.io/api/0/', bool $useThrottling = false)
     {
-        $this->httpClient = new \GuzzleHttp\Client([
+        $this->httpClient = new Client([
             'base_uri' => $sentryBase,
         ]);
         $this->options    = [
@@ -82,9 +68,6 @@ class SentryExporter
     }
 
     /**
-     * @param \stdClass $project
-     *
-     * @return array
      * @throws GuzzleException
      */
     protected function getIssues(\stdClass $project): array
@@ -95,7 +78,6 @@ class SentryExporter
     }
 
     /**
-     * @return mixed
      * @throws GuzzleException
      */
     protected function getProjects(): array
@@ -105,11 +87,6 @@ class SentryExporter
         return $this->getJson($response);
     }
 
-    /**
-     * @param Response $response
-     *
-     * @return array
-     */
     protected function getJson(Response $response): array
     {
         return json_decode($response->getBody()->getContents());
