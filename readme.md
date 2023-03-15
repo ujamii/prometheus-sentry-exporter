@@ -1,12 +1,15 @@
 # Exporter for sentry data in prometheus format
 
-This package uses the [Sentry](https://sentry.io/) web [api](https://docs.sentry.io/api/) to query for some statistics and outputs them in [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format to be scraped by [prometheus](https://prometheus.io/).
+This package uses the [Sentry](https://sentry.io/) web [api](https://docs.sentry.io/api/) to query for some statistics and outputs them 
+in [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format to be scraped by [prometheus](https://prometheus.io/).
 
 You can also fire it up as a [docker container](#with-docker).
 
 ## Usage
 
-Using this exporter throught with Composer or Docker, you will need the hostname of your sentry installation and an auth token, which you can create via `https://<YOUR-SENTRY-HOST>/api/` if you're working with the **Sentry self hosted**. If you're working with **Sentry cloud**, you will need to create the token via [`https://sentry.io/settings/account/api/auth-tokens/`](https://sentry.io/settings/account/api/auth-tokens/).
+Using this exporter with Composer or Docker, you will need the hostname of your sentry installation and an auth token, which you can create 
+via `https://<YOUR-SENTRY-HOST>/api/` if you're working with the **Sentry self hosted**. If you're working with **Sentry cloud**, you will 
+need to create the token via [`https://sentry.io/settings/account/api/auth-tokens/`](https://sentry.io/settings/account/api/auth-tokens/).
 
 ### with Composer
 
@@ -30,16 +33,19 @@ $exporter->run();
 
 ### with Docker
 
-The image is based on `php:8.0-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on localhost, you can see the metrics on http://localhost/metrics.
+The image is based on `php:8.0-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on 
+localhost, you can see the metrics on http://localhost/metrics.
 
 Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN` and `HTTP_PROTO`.
-The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default. If you're working with the Sentry Cloud, your `SENTRY_HOST` variable must be "sentry.io"
+The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default. If you're working with the Sentry 
+Cloud, your `SENTRY_HOST` variable must be "sentry.io"
 
 ```shell
-docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ujamii/prometheus-sentry-exporter
+docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ghcr.io/ujamii/prometheus-sentry-exporter
 ```
 
-View on [Docker Hub](https://hub.docker.com/r/ujamii/prometheus-sentry-exporter)
+Docker discontinues support for the free docker hub registry for orgs. The image is now available 
+on [GitHub Container Registry](https://github.com/ujamii/prometheus-sentry-exporter/pkgs/container/prometheus-sentry-exporter)
 
 ## Output
 

@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: ujamii/prometheus-sentry-exporter
+  repository: ghcr.io/ujamii/prometheus-sentry-exporter
   pullPolicy: IfNotPresent
   tag: "latest"
 
