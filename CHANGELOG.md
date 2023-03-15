@@ -1,3 +1,13 @@
+## 0.9.0 (March 15, 2023)
+  - [FEATURE] introduced USE_THROTTLING setting to throttle API requests to prevent rate limit (closes #19)
+  - Merge pull request #21 from ujamii/sergeylanzman/master
+  - [TASK] use PHP 8.1 docker image with production ini settings
+  - [TASK] dropped PHP 7 support 
+  - [TASK] added security advisories package
+  - [TASK] switched from DockerHub to GitHub package registry.
+  - Create docker-publish.yml
+  - [DOC] php 8.0 image
+
 ## 0.8.0 (August 05, 2021)
   - [CLEANUP] use import instead of FQN
   - [TASK] switched from php 7.2 to 8.0 in docker base image
