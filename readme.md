@@ -33,7 +33,7 @@ $exporter->run();
 
 ### with Docker
 
-The image is based on `php:8.0-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on 
+The image is based on `php:8.1-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on 
 localhost, you can see the metrics on http://localhost/metrics.
 
 Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN` and `HTTP_PROTO`.
