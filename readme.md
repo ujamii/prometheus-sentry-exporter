@@ -36,9 +36,9 @@ $exporter->run();
 The image is based on `php:8.1-apache` and thus exposes data on port 80 by default. Assuming you fire this up with `-p 80:80` on 
 localhost, you can see the metrics on http://localhost/metrics.
 
-Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN` and `HTTP_PROTO`.
-The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default. If you're working with the Sentry 
-Cloud, your `SENTRY_HOST` variable must be "sentry.io"
+Configuration is done with 3 env variables: `SENTRY_HOST`, `AUTH_TOKEN`, `USE_THROTTLING` and `HTTP_PROTO`.
+The first 2 are mandatory, `HTTP_PROTO` is optional and set to `https` by default. If you're working with the Sentry Cloud, your `SENTRY_HOST` variable must be "sentry.io"
+When you set `USE_THROTTLING` to `true/TRUE` or `1`, the exporter will throttle the API requests to prevent a rate limit. This is useful if you have a lot of projects and/or a lot of issues.
 
 ```shell
 docker run -d --name sentry-prometheus -e SENTRY_HOST=sentry.foobar.com -e AUTH_TOKEN=foobarlongtoken -p "80:80" ghcr.io/ujamii/prometheus-sentry-exporter

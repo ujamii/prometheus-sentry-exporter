@@ -18,7 +18,9 @@ class SentryExporter
 
     protected array $options = [];
 
-    public function __construct(string $token, string $sentryBase = 'https://sentry.io/api/0/')
+    protected bool $useThrottling = false;
+
+    public function __construct(string $token, string $sentryBase = 'https://sentry.io/api/0/', bool $useThrottling = false)
     {
         $this->httpClient = new Client([
             'base_uri' => $sentryBase,
@@ -29,7 +31,7 @@ class SentryExporter
                 'Accept'        => 'application/json',
             ]
         ];
-
+        $this->useThrottling = $useThrottling;
     }
 
     /**
@@ -40,8 +42,14 @@ class SentryExporter
         $gauges = GaugeCollection::withMetricName(MetricName::fromString('sentry_open_issue_events'))->withHelp('Number of events for one unresolved issue.');
 
         $projectData = $this->getProjects();
+        if($this->useThrottling){
+            sleep(1);
+        }
         foreach ($projectData as $project) {
             $projectIssues = $this->getIssues($project);
+            if($this->useThrottling){
+                sleep(1);
+            }
             foreach ($projectIssues as $issue) {
                 $gauges->add(
                     Gauge::fromValue($issue->count)->withLabels(
