@@ -45,23 +45,26 @@ class SentryExporter
         if($this->useThrottling){
             sleep(1);
         }
-        foreach ($projectData as $project) {
-            $projectIssues = $this->getIssues($project);
-            if($this->useThrottling){
-                sleep(1);
-            }
-            foreach ($projectIssues as $issue) {
-                $gauges->add(
-                    Gauge::fromValue($issue->count)->withLabels(
-                        Label::fromNameAndValue('project_slug', $project->slug),
-                        Label::fromNameAndValue('project_name', $project->name),
-                        Label::fromNameAndValue('issue_logger', $issue->logger ?? 'unknown'),
-                        Label::fromNameAndValue('issue_type', $issue->type),
-                        Label::fromNameAndValue('issue_link', $issue->permalink),
-                        Label::fromNameAndValue('issue_level', $issue->level)
-                    )
-                );
-            }
+        foreach (array("prod", "qa", "staging") as $env)
+          foreach ($projectData as $project) {
+              $projectIssues = $this->getIssues($project, $env);
+              if($this->useThrottling){
+                  sleep(1);
+              }
+              foreach ($projectIssues as $issue) {
+                  $gauges->add(
+                      Gauge::fromValue($issue->count)->withLabels(
+                          Label::fromNameAndValue('project_slug', $project->slug),
+                          Label::fromNameAndValue('project_name', $project->name),
+                          Label::fromNameAndValue('issue_logger', $issue->logger ?? 'unknown'),
+                          Label::fromNameAndValue('issue_type', $issue->type),
+                          Label::fromNameAndValue('issue_link', $issue->permalink),
+                          Label::fromNameAndValue('issue_level', $issue->level)
+                          Label::fromNameAndValue('environment', $env)
+                      )
+                  );
+              }
+          }
         }
 
         HttpResponse::fromMetricCollections($gauges)->withHeader('Content-Type', 'text/plain; charset=utf-8')->respond();
@@ -70,9 +73,9 @@ class SentryExporter
     /**
      * @throws GuzzleException
      */
-    protected function getIssues(\stdClass $project): array
+    protected function getIssues(\stdClass $project, $env): array
     {
-        $response = $this->httpClient->request('GET', "projects/{$project->organization->slug}/{$project->slug}/issues/", $this->options);
+        $response = $this->httpClient->request('GET', "projects/{$project->organization->slug}/{$project->slug}/issues/?" . http_build_query([ 'environment' => $env ]), $this->options);
 
         return $this->getJson($response);
     }
