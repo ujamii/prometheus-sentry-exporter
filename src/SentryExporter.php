@@ -45,7 +45,7 @@ class SentryExporter
         if($this->useThrottling){
             sleep(1);
         }
-        foreach (array("prod", "qa", "staging") as $env)
+        foreach (array("prod", "qa", "staging") as $env) {
           foreach ($projectData as $project) {
               $projectIssues = $this->getIssues($project, $env);
               if($this->useThrottling){
