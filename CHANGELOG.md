@@ -1,3 +1,7 @@
+## 0.10.0 (July 11, 2024)
+  - Merge pull request #27 from Slevy35/patch-1
+  - add support for multi arch docker images
+
 ## 0.9.0 (March 15, 2023)
   - [FEATURE] introduced USE_THROTTLING setting to throttle API requests to prevent rate limit (closes #19)
   - Merge pull request #21 from ujamii/sergeylanzman/master
