@@ -1,3 +1,21 @@
+## 0.10.1 (July 12, 2024)
+  - Update docker-publish.yml
+  - Merge pull request #33 from ujamii/dependabot/github_actions/docker/build-push-action-6
+  - Bump docker/build-push-action from 3 to 6
+  - Update docker-publish.yml
+  - Merge pull request #32 from ujamii/dependabot/github_actions/sigstore/cosign-installer-b235ed95bef2a3cf9f8641bc537bc22c7cb9a3a8
+  - Merge pull request #28 from ujamii/dependabot/github_actions/docker/setup-buildx-action-2ad185228a349d19414702819e06df9fa4314287
+  - Merge pull request #30 from ujamii/dependabot/github_actions/docker/build-push-action-6.3.0
+  - Merge pull request #29 from ujamii/dependabot/github_actions/docker/login-action-3.2.0
+  - Merge pull request #31 from ujamii/dependabot/github_actions/actions/checkout-4
+  - Bump sigstore/cosign-installer
+  - Bump actions/checkout from 3 to 4
+  - Bump docker/build-push-action from 2.10.0 to 6.3.0
+  - Bump docker/login-action from 1.9.0 to 3.2.0
+  - Bump docker/setup-buildx-action
+  - Update docker-publish.yml
+  - Update dependabot.yml
+
 ## 0.10.0 (July 11, 2024)
   - Merge pull request #27 from Slevy35/patch-1
   - add support for multi arch docker images
