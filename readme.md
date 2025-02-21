@@ -57,3 +57,12 @@ The script will generate something like:
 sentry_open_issue_events{project_slug="foobar", project_name="Foo Bar", issue_logger="php", issue_type="error", issue_link="https://<SENTRY-HOST>/<ORGANIZATION>/<PROJECT>/issues/1797/", issue_level="error"} 16.000000
 ...
 ```
+
+## License and Contribution
+
+[MIT](LICENSE)
+
+As this is OpenSource, you are very welcome to contribute by reporting bugs, improve the code, write tests or 
+whatever you are able to do to improve the project.
+
+If you want to do me a favour, buy me something from my [Amazon wishlist](https://www.amazon.de/registry/wishlist/2C7LSRMLEAD4F).
