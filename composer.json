@@ -13,7 +13,7 @@
         "php": ">=8.0",
         "ext-json": "*",
         "openmetrics-php/exposition-text": "^0.4",
-        "guzzlehttp/guzzle": "^6.3 || ^7.2"
+        "guzzlehttp/guzzle": "^8.1.0"
 
     },
     "require-dev": {
