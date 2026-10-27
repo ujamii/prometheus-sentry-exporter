@@ -2,3 +2,5 @@
 !/metrics
 !/src
 !/composer.json
+/vendor
+/chart
