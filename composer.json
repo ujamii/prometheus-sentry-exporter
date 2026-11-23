@@ -10,10 +10,10 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.5",
         "ext-json": "*",
         "openmetrics-php/exposition-text": "^0.4",
-        "guzzlehttp/guzzle": "^6.3 || ^7.2 || ^8.2"
+        "guzzlehttp/guzzle": "^8.2"
 
     },
     "require-dev": {
